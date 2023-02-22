@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from fastapi import Response
 import json
@@ -34,3 +35,7 @@ def health_check():
 # @app.get("/health_check")
 # def hello():
 #     return "health check"
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
