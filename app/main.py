@@ -3,7 +3,11 @@ from fastapi import FastAPI
 from fastapi import Response
 import json
 from fastapi.middleware.cors import CORSMiddleware
-import os
+#from dotenv import load_dotenv
+#import os
+from app.config import settings
+
+#load_dotenv()
 
 app = FastAPI()
 
@@ -31,15 +35,6 @@ def health_check():
     return Response(content=json_str, media_type='application/json')
 
 
-
-# @app.get("/health_check")
-# def hello():
-#     return "health check"
-for key in os.environ:
-    print(key + ": " + os.environ[key])
-
-
-
 if __name__ == "__main__":
-    #uvicorn.run(app, host=os.environ.get("HOST"), port=os.environ.get("PORT"))
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    #uvicorn.run(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")))
+    uvicorn.run(app, host=settings.HOST, port=int(settings.PORT))

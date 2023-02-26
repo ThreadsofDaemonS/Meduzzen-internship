@@ -13,7 +13,7 @@ First you need from my Dockerfile make build:
 docker build -t fastapiapp:lts .
 
 Then you need to start the docker container
-docker run -p 8001:8000 -d --rm --name fastapiapp --env-file ./.env fastapiapp:lts
+docker run -p 8001:8000 -d --rm --name fastapiapp fastapiapp:lts
 
 And now you need to run command:
 docker exec -it Id_of_your_container bash
