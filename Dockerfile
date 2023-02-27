@@ -6,7 +6,7 @@ WORKDIR /code
 
 RUN python -m pip install --upgrade pip
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY . /code/
 
