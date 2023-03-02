@@ -5,7 +5,7 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 from config import settings
-from connections_to_dbs import database, ConnectionToDbs
+from connections_to_dbs import database, ConnectionToDb
 
 
 
@@ -50,6 +50,5 @@ async def shutdown():
 
 if __name__ == "__main__":
     #uvicorn.run(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")))
-    asyncio.run(ConnectionToDbs())
     uvicorn.run("main:app", host=settings.HOST, port=int(settings.PORT), reload=True)
 
