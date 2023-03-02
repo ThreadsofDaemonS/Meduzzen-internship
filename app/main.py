@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi import Response
 import json
 from fastapi.middleware.cors import CORSMiddleware
-import asyncio
 from config import settings
 from connections_to_dbs import database, ConnectionToDb
 
@@ -47,6 +46,8 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     await database.disconnect()
+
+ConnectionToDb()
 
 if __name__ == "__main__":
     #uvicorn.run(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")))
