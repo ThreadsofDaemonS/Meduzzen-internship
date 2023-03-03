@@ -4,7 +4,7 @@ from fastapi import Response
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from connections_to_dbs import database, ConnectionToDb
+from connections_to_dbs import database, get_db, ConnectionToDb
 
 
 
@@ -41,11 +41,11 @@ def health_check():
 
 @app.on_event("startup")
 async def startup():
-    await database.connect()
+    await get_db(database).connect()
 
 @app.on_event("shutdown")
 async def shutdown():
-    await database.disconnect()
+    await get_db(database).disconnect()
 
 ConnectionToDb()
 

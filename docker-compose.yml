@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  web:
+  app:
 #    image: api
     build: .
     restart: unless-stopped
