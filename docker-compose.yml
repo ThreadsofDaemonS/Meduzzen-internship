@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+  app:
+#    image: api
+    build: .
+    restart: unless-stopped
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - database
+      - redis
+
+
+  database:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    #user: postgres
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    volumes:
+      - redis_data:/var/lib/redis/data
+
+volumes:
+  pgdbdata: null
+  redis_data: null
