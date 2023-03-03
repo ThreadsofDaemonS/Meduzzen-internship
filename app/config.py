@@ -3,10 +3,14 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     HOST: str
     PORT: int
+    DB_TEST: str
+
     POSTGRES_HOST: str
     POSTGRES_USER: str
     POSTGRES_DB: str
     POSTGRES_PASSWORD: str
+    POSTGRES_URL: str
+
 
     POSTGRES_PORT: int
 

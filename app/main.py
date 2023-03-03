@@ -4,7 +4,7 @@ from fastapi import Response
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from connections_to_dbs import database, get_db, ConnectionToDb
+from connections import get_db, connect_to_redis, disconnect_from_redis
 
 
 
@@ -41,13 +41,14 @@ def health_check():
 
 @app.on_event("startup")
 async def startup():
-    await get_db(database).connect()
+    await get_db().connect()
+    await connect_to_redis()
+
 
 @app.on_event("shutdown")
 async def shutdown():
-    await get_db(database).disconnect()
-
-ConnectionToDb()
+    await get_db().disconnect()
+    await disconnect_from_redis()
 
 if __name__ == "__main__":
     #uvicorn.run(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")))
